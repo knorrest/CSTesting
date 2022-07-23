@@ -12,15 +12,24 @@ namespace SynonymsAPI.Services
         {
             _context = context;
         }
-        public async Task<List<WordSynonym>> Get(string word)
+        public async Task<WordSynonymsDto> GetAsync(string word)
         {
-            return await _context.WordSynonyms.Where(x => x.Word.WordString == word).ToListAsync();
+            var wordSynonyms = await _context.Synonyms.Where(x=> x.Word.WordString == word).Select(x=>x.SynonymString).ToListAsync();
+            return new WordSynonymsDto()
+            {
+                Word = word,
+                Synonyms = wordSynonyms
+            };
         }
-        public async Task<bool> Add(string word, string synonym)
+        public async Task<bool> AddAsync(string word, string synonym)
         {
             var wordFromDb = await _context.Words.FirstOrDefaultAsync(x => x.WordString == word);
-            wordFromDb.WordSynonyms.Add(new WordSynonym { WordId = wordFromDb.Id, Synonym = synonym})
-
+            if (wordFromDb == null)
+            {
+               // throw new NotFoundException("")
+            }
+            wordFromDb.Synonyms.Add(new Synonym() { SynonymString = synonym });
+            return true;
         }
     }
 }

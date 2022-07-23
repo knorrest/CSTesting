@@ -5,7 +5,7 @@ namespace SynonymsAPI.Interfaces
 {
     public interface ISynonymsService
     {
-        Task<List<WordSynonym>> Get(string word);
-        Task<bool> Add(string word, string synonym);
+        Task<WordSynonymsDto> GetAsync(string word);
+        Task<bool> AddAsync(string word, string synonym);
     }
 }

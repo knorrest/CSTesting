@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SynonymsAPI.DTOs;
+using SynonymsAPI.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,24 +10,31 @@ namespace SynonymsAPI.Controllers
     [ApiController]
     public class SynonymsController : ControllerBase
     {
-        // GET: api/<SynonymsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ISynonymsService _synonymsService;
+        public SynonymsController(ISynonymsService synonymsService)
         {
-            return new string[] { "value1", "value2" };
+            _synonymsService = synonymsService;
         }
 
-        // GET api/<SynonymsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/<SynonymsController>
+        [HttpGet]
+        public async Task<WordSynonymsDto> Get(string word)
         {
-            return "value";
+            return await _synonymsService.GetAsync(word);
         }
+
+        //// GET api/<SynonymsController>/5
+        //[HttpGet("{id}")]
+        //public Task<string> Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/<SynonymsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<bool> Post(string word, string synonym)
         {
+            return await _synonymsService.AddAsync(word, synonym);
         }
 
         // PUT api/<SynonymsController>/5
