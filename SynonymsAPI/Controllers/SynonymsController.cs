@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SynonymsAPI.DTOs;
 using SynonymsAPI.Interfaces;
+using SynonymsDB;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,11 +16,28 @@ namespace SynonymsAPI.Controllers
             _synonymsService = synonymsService;
         }
 
-        // GET: api/<SynonymsController>
         [HttpGet]
-        public async Task<WordSynonymsDto> Get(string word)
+        public ActionResult<Message> Get()
         {
-            return await _synonymsService.GetAsync(word);
+            var words = _synonymsService.Get();
+            return new Message()
+            {
+                Data = words,
+                IsValid = true
+            };
+        }
+
+
+        // GET: api/<SynonymsController>
+        [HttpGet("{word}")]
+        public ActionResult<Message> Get(string word)
+        {
+            var words = _synonymsService.GetByWord(word);
+            return new Message()
+            {
+                Data = words,
+                IsValid = true
+            };
         }
 
         //// GET api/<SynonymsController>/5
@@ -32,9 +49,9 @@ namespace SynonymsAPI.Controllers
 
         // POST api/<SynonymsController>
         [HttpPost]
-        public async Task<bool> Post(string word, string synonym)
+        public ActionResult<bool> Post(WordDto word)
         {
-            return await _synonymsService.AddAsync(word, synonym);
+            return _synonymsService.Add(word.WordString, word.Synonyms.ToList());
         }
 
         // PUT api/<SynonymsController>/5

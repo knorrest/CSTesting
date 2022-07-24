@@ -746,19 +746,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Irma\\.nuget\\packages\\": {}
+    "C:\\Users\\IrmaDzemidzic\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
+      "projectUniqueName": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
       "projectName": "SynonymsDB",
-      "projectPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
-      "packagesPath": "C:\\Users\\Irma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\obj\\",
+      "projectPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
+      "packagesPath": "C:\\Users\\IrmaDzemidzic\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsDB\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Irma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\IrmaDzemidzic\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -824,7 +828,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

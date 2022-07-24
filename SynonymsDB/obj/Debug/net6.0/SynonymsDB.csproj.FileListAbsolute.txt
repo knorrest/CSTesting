@@ -26,3 +26,17 @@ C:\Users\Irma\source\repos\SynonymsApp\Synonyms\SynonymsDB\bin\Debug\net6.0\Syno
 C:\Users\Irma\source\repos\SynonymsApp\Synonyms\SynonymsDB\bin\Debug\net6.0\SynonymsDB.pdb
 C:\Users\Irma\source\repos\SynonymsApp\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.genruntimeconfig.cache
 C:\Users\Irma\source\repos\SynonymsApp\Synonyms\SynonymsDB\obj\Debug\net6.0\ref\SynonymsDB.dll
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\bin\Debug\net6.0\SynonymsDB.deps.json
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\bin\Debug\net6.0\SynonymsDB.runtimeconfig.json
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\bin\Debug\net6.0\SynonymsDB.dll
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\bin\Debug\net6.0\SynonymsDB.pdb
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.csproj.AssemblyReference.cache
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.AssemblyInfoInputs.cache
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.AssemblyInfo.cs
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.csproj.CoreCompileInputs.cache
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.dll
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\refint\SynonymsDB.dll
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.pdb
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\SynonymsDB.genruntimeconfig.cache
+C:\Users\IrmaDzemidzic\Repositories\Synonyms\SynonymsDB\obj\Debug\net6.0\ref\SynonymsDB.dll

@@ -4,10 +4,10 @@
     {
         public Word()
         {
-            Synonyms = new HashSet<Synonym>();
+            SynonymIds = new List<long>();
         }
         public long Id { get; set; }
         public string WordString { get; set; }
-        public virtual ICollection<Synonym> Synonyms { get; set; }
+        public virtual ICollection<long> SynonymIds { get; set; }
     }
 }

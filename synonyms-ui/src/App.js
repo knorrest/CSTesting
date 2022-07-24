@@ -1,7 +1,9 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import WordList from "./components/WordList/WordList";
-import AddSynonym from "./components/AddSynonym/AddSynonym";
+import AddSynonym from "./components/AddWord/AddWord";
+import AddWord from "./components/AddWord/AddWord";
 
 function App() {
   return (
@@ -9,7 +11,8 @@ function App() {
       <div id="main-wrapper" className="main-wrapper">
         <Routes>
           <Route path="/" element={<WordList />}></Route>
-          <Route path="/add-word" element={<AddSynonym />}></Route>
+          <Route path="/add-word" element={<AddWord />}></Route>
+          <Route path="/add-synonym" element={<AddSynonym />}></Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

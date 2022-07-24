@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {}
+    "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {
+    "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
+        "projectUniqueName": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
         "projectName": "SynonymsAPI",
-        "projectPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
-        "packagesPath": "C:\\Users\\Irma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsAPI\\obj\\",
+        "projectPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
+        "packagesPath": "C:\\Users\\IrmaDzemidzic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Irma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\IrmaDzemidzic\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,11 +30,7 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj": {
-                "projectPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -60,9 +59,17 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.Runtime.Caching": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -83,87 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
-        "projectName": "SynonymsDB",
-        "projectPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\SynonymsDB.csproj",
-        "packagesPath": "C:\\Users\\Irma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Irma\\source\\repos\\SynonymsApp\\Synonyms\\SynonymsDB\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Irma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.7, )"
-            },
-            "Npgsql": {
-              "target": "Package",
-              "version": "[6.0.5, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[6.0.5, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
