@@ -2,13 +2,9 @@
 {
     public class Synonym
     {
-        public Synonym()
-        {
-            WordSynonyms = new HashSet<WordSynonym>();
-        }
-
         public long Id { get; set; }
         public string SynonymString { get; set; }
-        public virtual ICollection<WordSynonym> WordSynonyms { get; set; }
+        public long WordId { get; set; }
+        public Word Word { get; set; }
     }
 }

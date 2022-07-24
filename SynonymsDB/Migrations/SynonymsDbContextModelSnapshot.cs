@@ -35,8 +35,14 @@ namespace SynonymsDB.Migrations
                         .HasColumnType("text")
                         .HasColumnName("synonym");
 
+                    b.Property<long>("WordId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("word_id");
+
                     b.HasKey("Id")
                         .HasName("id");
+
+                    b.HasIndex("WordId");
 
                     b.ToTable("synonyms", (string)null);
                 });
@@ -60,50 +66,20 @@ namespace SynonymsDB.Migrations
                     b.ToTable("words", (string)null);
                 });
 
-            modelBuilder.Entity("SynonymsDB.WordSynonym", b =>
+            modelBuilder.Entity("SynonymsDB.Synonym", b =>
                 {
-                    b.Property<long>("WordId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("word_id");
-
-                    b.Property<long>("SynonymId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("synonym_id");
-
-                    b.HasKey("WordId", "SynonymId");
-
-                    b.HasIndex("SynonymId");
-
-                    b.ToTable("wordSynonyms", (string)null);
-                });
-
-            modelBuilder.Entity("SynonymsDB.WordSynonym", b =>
-                {
-                    b.HasOne("SynonymsDB.Synonym", "Synonym")
-                        .WithMany("WordSynonyms")
-                        .HasForeignKey("SynonymId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SynonymsDB.Word", "Word")
-                        .WithMany("WordSynonyms")
+                        .WithMany("Synonyms")
                         .HasForeignKey("WordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Synonym");
-
                     b.Navigation("Word");
-                });
-
-            modelBuilder.Entity("SynonymsDB.Synonym", b =>
-                {
-                    b.Navigation("WordSynonyms");
                 });
 
             modelBuilder.Entity("SynonymsDB.Word", b =>
                 {
-                    b.Navigation("WordSynonyms");
+                    b.Navigation("Synonyms");
                 });
 #pragma warning restore 612, 618
         }

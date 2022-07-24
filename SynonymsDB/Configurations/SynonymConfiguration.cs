@@ -15,6 +15,7 @@ namespace SynonymsDB.Configurations
             builder.ToTable("synonyms");
             builder.HasKey(x => x.Id).HasName("id");
             builder.Property(x => x.Id).HasColumnName("id").IsRequired();
+            builder.Property(x => x.WordId).HasColumnName("word_id").IsRequired();
             builder.Property(x => x.SynonymString).HasColumnName("synonym").IsRequired();
         }
     }

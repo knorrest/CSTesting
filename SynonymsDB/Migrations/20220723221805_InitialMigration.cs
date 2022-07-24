@@ -10,19 +10,6 @@ namespace SynonymsDB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "synonyms",
-                columns: table => new
-                {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    synonym = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("id", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "words",
                 columns: table => new
                 {
@@ -36,23 +23,19 @@ namespace SynonymsDB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "wordSynonyms",
+                name: "synonyms",
                 columns: table => new
                 {
-                    word_id = table.Column<long>(type: "bigint", nullable: false),
-                    synonym_id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    synonym = table.Column<string>(type: "text", nullable: false),
+                    word_id = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_wordSynonyms", x => new { x.word_id, x.synonym_id });
+                    table.PrimaryKey("id", x => x.id);
                     table.ForeignKey(
-                        name: "FK_wordSynonyms_synonyms_synonym_id",
-                        column: x => x.synonym_id,
-                        principalTable: "synonyms",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_wordSynonyms_words_word_id",
+                        name: "FK_synonyms_words_word_id",
                         column: x => x.word_id,
                         principalTable: "words",
                         principalColumn: "id",
@@ -60,16 +43,13 @@ namespace SynonymsDB.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_wordSynonyms_synonym_id",
-                table: "wordSynonyms",
-                column: "synonym_id");
+                name: "IX_synonyms_word_id",
+                table: "synonyms",
+                column: "word_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "wordSynonyms");
-
             migrationBuilder.DropTable(
                 name: "synonyms");
 
