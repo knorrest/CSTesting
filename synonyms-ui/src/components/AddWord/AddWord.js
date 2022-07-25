@@ -1,75 +1,82 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { addSynonym } from "../../services/synonymsApiService";
 import "./addWord.css";
 
-class AddWord extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { word: "", inputList: [""] };
+function AddWord() {
+  const [word, setWord] = useState("");
+  const [inputList, setInputList] = useState(["", ""]);
+  let navigate = useNavigate();
 
-    this.handleWordChange = this.handleWordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  function addNewSynonym() {
+    let newInputList = [...inputList, ""];
+    setInputList(newInputList);
   }
 
-  handleWordChange = (e) => {
-    this.setState({ word: e.target.value });
-  };
-
-  addNewSynonym = () => {
-    let newInputList = [...this.state.inputList, ""];
-    this.setState({ inputList: newInputList });
-  };
-
-  handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    addSynonym(this.state.word, this.state.inputList);
-  };
+    addSynonym(word, inputList);
+    navigate("/");
+  }
 
-  handleChange = (index, event) => {
-    let data = [...this.state.inputList];
+  function handleKeyDown(e) {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  }
+
+  function handleChange(index, event) {
+    let data = [...inputList];
     data[index] = event.target.value;
-    this.setState({ inputList: data });
-  };
+    setInputList(data);
+  }
 
-  render() {
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Word:
-            <input
+  return (
+    <>
+      <p>
+        Add a new word with synonyms. You can easily add multiple synonyms for
+        the same word. If you add existing word, synonyms will merge with the
+        existing one. Type one synonym in each box. Words are currently case
+        sensitive.
+      </p>
+      <div className="add-word-form">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formWord">
+            <Form.Label>Word:</Form.Label>
+            <Form.Control
+              required
               type="text"
-              name="word"
-              value={this.state.word}
-              onChange={this.handleWordChange}
-            ></input>
-          </label>
-          <br />
-          <br />
-          <label>
-            Synonyms:
-            {this.state.inputList.map((input, index) => (
+              value={word}
+              onChange={(e) => setWord(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formsynonyms">
+            <Form.Label>Synonyms:</Form.Label>
+            {inputList.map((input, index) => (
               <div key={index}>
-                <input
+                <Form.Control
+                  required
                   type="text"
-                  name="synonym"
                   value={input}
-                  onChange={(e) => this.handleChange(index, e)}
-                ></input>
+                  onKeyDown={handleKeyDown}
+                  onChange={(e) => handleChange(index, e)}
+                ></Form.Control>
                 <br />
               </div>
             ))}
-            <button type="button" onClick={this.addNewSynonym}>
-              Add new synonym
-            </button>
-          </label>
-          <button type="submit" onClick={this.addWord}>
+            <Button variant="light" type="button" onClick={addNewSynonym}>
+              + Add new synonym
+            </Button>
+          </Form.Group>
+          <hr></hr>
+          <Button variant="primary" type="submit">
             Add Word
-          </button>
-        </form>
-      </>
-    );
-  }
+          </Button>
+        </Form>
+      </div>
+    </>
+  );
 }
 
 export default AddWord;

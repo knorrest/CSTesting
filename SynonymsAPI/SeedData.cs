@@ -28,7 +28,7 @@ namespace SynonymsAPI
                 {
                     Id = 4,
                     WordString = "Property",
-                    SynonymIds = new List<long>() { 1, 2, 3 }
+                    SynonymIds = new List<long>() { 3 }
                 },
                   new Word()
                 {
