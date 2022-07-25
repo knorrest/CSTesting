@@ -27,18 +27,18 @@ namespace SynonymsAPI.Controllers
             };
         }
 
-
-        // GET: api/<SynonymsController>
-        [HttpGet("{word}")]
-        public ActionResult<Message> Get(string word)
+        [HttpGet("search")]
+        public ActionResult<Message> Get([FromQuery] string word)
         {
-            var words = _synonymsService.GetByWord(word);
+            var words = _synonymsService.SearchByWord(word);
             return new Message()
             {
                 Data = words,
                 IsValid = true
             };
         }
+
+       
 
         //// GET api/<SynonymsController>/5
         //[HttpGet("{id}")]

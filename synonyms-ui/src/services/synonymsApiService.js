@@ -8,6 +8,13 @@ export const getAllWords = async () => {
   });
 };
 
+export const getWordSynonyms = async (word) => {
+  return axios.get(`${API_URL}/search?word=${word}`).then((res) => {
+    const words = res.data.data;
+    return words;
+  });
+};
+
 export const addSynonym = async (word, synonymList) => {
   return axios
     .post(`${API_URL}`, {

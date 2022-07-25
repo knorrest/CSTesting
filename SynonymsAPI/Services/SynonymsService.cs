@@ -47,6 +47,26 @@ namespace SynonymsAPI.Services
             return wordDto;
         }
 
+        public List<WordDto> SearchByWord(string word)
+        {
+            //Get all synonyms for that word
+            var wordsWithSynonyms = _words.Where(x=> x.WordString.ToLower().StartsWith(word.ToLower()));
+            var wordsList = new List<WordDto>();
+
+            //Words not found
+            if (!wordsWithSynonyms.Any()) return wordsList;
+
+            //Get synonyms
+            foreach (var wordWithSynonyms in wordsWithSynonyms)
+            {
+                var wordDto = new WordDto() { WordString = wordWithSynonyms.WordString };
+                wordDto.Synonyms = _words.Where(x => wordWithSynonyms.SynonymIds.Contains(x.Id)).Select(x => x.WordString).ToList();
+                wordsList.Add(wordDto);
+            }
+            return wordsList;
+        }
+
+
         private List<string> GetSynonymWords(Word initialWord)
         {
             var synonymWords = _words.Where(w => initialWord.SynonymIds.Contains(w.Id));
@@ -97,7 +117,8 @@ namespace SynonymsAPI.Services
                 _words.Add(new Word()
                 {
                     Id = nextId,
-                    WordString = synonym
+                    WordString = synonym,
+                    SynonymIds = synonymIds,
                 });
                 newSynonymIds.Add(nextId);
                 nextId++;
@@ -106,39 +127,34 @@ namespace SynonymsAPI.Services
             //Check if word already exists
             var existingWord = _words.FirstOrDefault(x => x.WordString == word);
 
+            var allSynonymIds = synonymIds.Concat(newSynonymIds).ToList();
+
             //If it doesn't, add the word and synonyms
             if (existingWord == null)
             {
-                var allSynonymIds = synonymIds.Concat(newSynonymIds).ToList();
-                _words.Add(new Word() { Id = nextId, WordString = word, SynonymIds = synonymIds });
-
-                //Update the Synonym references
-                _words.Where(x => synonymIds.Contains(x.Id)).Select(x =>
-                {
-                    x.SynonymIds = synonymIds;
-                    return x;
-                }).ToList();
-
-
+                //Add new word and bind synonyms
+                _words.Add(new Word() { Id = nextId, WordString = word, SynonymIds = allSynonymIds });
             }
             else
             {
                 //If it does, hook only synonyms that aren't already in the list
-                var wordSynonymIds = existingWord.SynonymIds.Concat(newSynonymIds).Distinct().ToList();
                 _words.Where(x => x.Id == existingWord.Id).Select(x =>
                 {
-                    x.SynonymIds = wordSynonymIds;
+                    x.SynonymIds = x.SynonymIds.Concat(newSynonymIds).ToList();
                     return x;
                 }).ToList();
-
-                //Update newly added synonyms to have exact references
-                _words.Where(x => newSynonymIds.Contains(x.Id)).Select(x =>
-                {
-                    x.SynonymIds.Add(existingWord.Id);
-                    return x;
-                }).ToList();
+                allSynonymIds = allSynonymIds.Concat(existingWord.SynonymIds).ToList();
+                allSynonymIds = allSynonymIds.Distinct().ToList();
             }
+            //Update newly added synonyms to have exact references
+            _words.Where(x => allSynonymIds.Contains(x.Id)).Select(x =>
+            {
+                var idsToAdd = allSynonymIds.Where(id => id != x.Id);
+                x.SynonymIds = x.SynonymIds.Concat(idsToAdd).ToList();
+                return x;
+            }).ToList();
             _cache.Set(wordListCacheKey, _words);
+
             return true;
         }
     }
