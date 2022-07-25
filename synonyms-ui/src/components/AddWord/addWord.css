@@ -1,4 +1,17 @@
-.add-word-form{
-    margin:auto;
-    width: 500px;
+.add-word-form {
+  margin: auto;
+  padding: 30px;
+  width: 700px;
+  background-color: rgb(248, 249, 250);
+}
+.add-synonym-button-wrapper {
+  text-align: right;
+}
+
+.add-word-button-wrapper {
+  text-align: center;
+}
+
+.add-word-button-wrapper button {
+  width: 50%;
 }

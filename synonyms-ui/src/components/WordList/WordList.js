@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { getAllWords } from "../../services/synonymsApiService";
 import "./wordList.css";
 
-function WordList(props) {
+function WordList() {
   const [wordList, setWordList] = useState([]);
-  let navigate = useNavigate();
 
   async function getWords() {
     let words = await getAllWords();
@@ -16,18 +14,9 @@ function WordList(props) {
   useEffect(() => {
     getWords();
   }, []);
-  function addNewWord() {
-    let path = `/add-word`;
-    navigate(path);
-  }
 
   return (
     <>
-      <h1>Words with synonyms</h1>
-      <Button variant="primary" onClick={() => addNewWord()}>
-        Add new Word
-      </Button>
-
       <p>Here is a list of existing words and their synonyms.</p>
       <Table striped bordered hover>
         <thead>

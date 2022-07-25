@@ -9,49 +9,49 @@ namespace SynonymsAPI
                 new Word()
                 {
                     Id = 1,
-                    WordString = "House",
+                    WordString = "house",
                     SynonymIds = new List<long>() { 2, 3, 4 }
                 },
                 new Word()
                 {
                     Id = 2,
-                    WordString = "Home",
+                    WordString = "home",
                     SynonymIds = new List<long>() { 1, 3, 4 }
                 },
                  new Word()
                 {
                     Id = 3,
-                    WordString = "Accommodation",
+                    WordString = "accommodation",
                     SynonymIds = new List<long>() { 1, 2, 4 }
                 },
                   new Word()
                 {
                     Id = 4,
-                    WordString = "Property",
+                    WordString = "property",
                     SynonymIds = new List<long>() { 3 }
                 },
                   new Word()
                 {
                     Id = 5,
-                    WordString = "Job",
+                    WordString = "job",
                     SynonymIds = new List<long>() { 6, 7, 8 }
                 },
                  new Word()
                 {
                     Id = 6,
-                    WordString = "Occupation",
+                    WordString = "occupation",
                     SynonymIds = new List<long>() { 5, 7, 8 }
                 },
                   new Word()
                 {
                     Id = 7,
-                    WordString = "Position",
+                    WordString = "position",
                     SynonymIds = new List<long>() { 5,6,8 }
                 },
                     new Word()
                 {
                     Id = 8,
-                    WordString = "Career",
+                    WordString = "career",
                     SynonymIds = new List<long>() {5, 6, 7}
                 }
         };
