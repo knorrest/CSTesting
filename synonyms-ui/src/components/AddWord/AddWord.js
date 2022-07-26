@@ -48,8 +48,7 @@ function AddWord() {
       <p>
         Add a new word with synonyms. You can easily add multiple synonyms for
         the same word. If you add existing word, synonyms will merge with the
-        existing one. Type one synonym in each box. Words are currently case
-        sensitive.
+        existing one. Type one synonym in each box. Words are case insensitive.
       </p>
       {isLoading && <Loading />}
       {!isLoading && (

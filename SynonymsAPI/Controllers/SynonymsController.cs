@@ -53,17 +53,5 @@ namespace SynonymsAPI.Controllers
         {
             return _synonymsService.Add(word.WordString, word.Synonyms.ToList());
         }
-
-        // PUT api/<SynonymsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<SynonymsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
