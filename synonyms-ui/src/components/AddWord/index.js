@@ -1,2 +1,2 @@
-import AddSynonym from "./AddSynonym";
-export default AddSynonym;
+import AddWord from "./AddWord";
+export default AddWord;

@@ -5,3 +5,9 @@
     padding: 15px;
     width: 100%;
   }
+
+  .validation-error {
+    color: red;
+    font-size: 12px;
+    margin-bottom:20px
+}

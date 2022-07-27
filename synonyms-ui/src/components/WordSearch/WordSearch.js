@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { InputGroup, Form, Table, Spinner } from "react-bootstrap";
+import React, { useState } from "react";
 import "./wordSearch.css";
 import { debounce } from "lodash";
-import { getWordSynonyms } from "../../services/synonymsApiService";
-import Loading from "../Shared/Loading/Loading";
+import { Table } from "react-bootstrap";
 
-function WordSearch(props) {
+import { getWordSynonyms } from "../../services/synonymsApiService";
+import Loading from "../Shared/Loading";
+import TextField from "../Form/textField";
+
+function WordSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [wordList, setWordList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (searchTerm !== "") fetchData();
-  }, [searchTerm]);
-
-  const fetchData = async () => {
+  const fetchData = async (searchTerm) => {
     setIsLoading(true);
     try {
       let words = await getWordSynonyms(searchTerm);
@@ -26,9 +24,12 @@ function WordSearch(props) {
     }
   };
 
-  const handleChange = debounce((e) => {
-    setSearchTerm(e.target.value);
-  }, 500);
+  const debounceFn = React.useMemo(() => debounce(fetchData, 500), []);
+
+  function handleChange(event) {
+    setSearchTerm(event.target.value);
+    debounceFn(event.target.value);
+  }
 
   const getTableWithData = () => {
     return (
@@ -53,14 +54,13 @@ function WordSearch(props) {
   return (
     <>
       <p>Find synonyms for word:</p>
-      <InputGroup className="mb-3">
-        <Form.Control
-          placeholder="Type in the word"
-          aria-label="word"
-          aria-describedby="basic-addon1"
-          onChange={handleChange}
-        />
-      </InputGroup>
+      <TextField
+        type="text"
+        id="word"
+        name="word"
+        value={searchTerm}
+        onChange={handleChange}
+      />
       {isLoading && <Loading />}
       {!isLoading && wordList.length > 0 && <>{getTableWithData()}</>}
       {!isLoading && searchTerm && wordList.length === 0 && (

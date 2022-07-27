@@ -15,3 +15,19 @@
 .add-word-button-wrapper button {
   width: 50%;
 }
+
+.synonyms-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-synonyms {
+  flex-grow: 1;
+}
+
+.button-synonyms {
+  height: 100%;
+  width: 100px;
+  margin: 10px 0;
+  padding: 10px;
+}

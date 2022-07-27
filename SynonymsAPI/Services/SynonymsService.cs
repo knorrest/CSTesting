@@ -39,10 +39,13 @@ namespace SynonymsAPI.Services
 
             //Word not found
             if (wordWithSynonyms == null) return null;
-            var wordDto = new WordDto() { WordString = word };
-
-            //Get synonyms
-            wordDto.Synonyms = _words.Where(x => wordWithSynonyms.SynonymIds.Contains(x.Id)).Select(x => x.WordString).ToList();
+            var wordDto = new WordDto
+            {
+                Id = wordWithSynonyms.Id,
+                WordString = word,             
+                //Get synonyms
+                Synonyms = _words.Where(x => wordWithSynonyms.SynonymIds.Contains(x.Id)).Select(x => x.WordString).ToList()
+            };
 
             return wordDto;
         }
@@ -59,8 +62,12 @@ namespace SynonymsAPI.Services
             //Get synonyms
             foreach (var wordWithSynonyms in wordsWithSynonyms)
             {
-                var wordDto = new WordDto() { WordString = wordWithSynonyms.WordString };
-                wordDto.Synonyms = _words.Where(x => wordWithSynonyms.SynonymIds.Contains(x.Id)).Select(x => x.WordString).ToList();
+                var wordDto = new WordDto
+                {
+                    Id = wordWithSynonyms.Id,
+                    WordString = wordWithSynonyms.WordString,
+                    Synonyms = _words.Where(x => wordWithSynonyms.SynonymIds.Contains(x.Id)).Select(x => x.WordString).ToList()
+                };
                 wordsList.Add(wordDto);
             }
             return wordsList;

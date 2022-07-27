@@ -1,26 +1,34 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import WordList from "./components/WordList/WordList";
-import AddWord from "./components/AddWord/AddWord";
-import WordSearch from "./components/WordSearch";
+
+import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
+
+import WordList from "./components/WordList";
+import AddWord from "./components/AddWord";
+import WordSearch from "./components/WordSearch";
 
 function App() {
   return (
     <>
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">Words with synonyms</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Nav className="me-auto">
-            <Nav.Link href="/">Search synonyms</Nav.Link>
-            <Nav.Link href="/all">View all words</Nav.Link>
-            <Nav.Link href="/add-word">Add new</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <BrowserRouter>
+        <Navbar bg="light">
+          <Container>
+            <Navbar.Brand href="/">Words with synonyms</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Nav className="me-auto">
+              <Link className="nav-link" to="/">
+                Search synonyms
+              </Link>
+              <Link className="nav-link" to="/all">
+                View all words
+              </Link>
+              <Link className="nav-link" to="/add-word">
+                Add new
+              </Link>
+            </Nav>
+          </Container>
+        </Navbar>
         <div id="main-wrapper" className="main-wrapper">
           <Container>
             <Routes>

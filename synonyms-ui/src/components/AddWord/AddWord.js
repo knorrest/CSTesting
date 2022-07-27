@@ -1,27 +1,23 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { addSynonym } from "../../services/synonymsApiService";
-import Loading from "../Shared/Loading/Loading";
 import "./addWord.css";
 
+import { Button } from "react-bootstrap";
+import Loading from "../Shared/Loading";
+
+import { addSynonym } from "../../services/synonymsApiService";
+import { Formik, Form, Field, FieldArray } from "formik";
+import TextField from "../Form/textField";
+
 function AddWord() {
-  const [word, setWord] = useState("");
-  const [inputList, setInputList] = useState([""]);
   const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
 
-  function addNewSynonym() {
-    let newInputList = [...inputList, ""];
-    setInputList(newInputList);
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(values) {
     setIsLoading(true);
     try {
-      var result = await addSynonym(word, inputList);
+      var result = await addSynonym(values.word, values.synonyms);
       if (result) navigate("/all");
       else alert("Something went wrong");
     } catch {
@@ -29,18 +25,6 @@ function AddWord() {
     } finally {
       setIsLoading(false);
     }
-  }
-
-  function handleKeyDown(e) {
-    if (e.key === " ") {
-      e.preventDefault();
-    }
-  }
-
-  function handleChange(index, event) {
-    let data = [...inputList];
-    data[index] = event.target.value;
-    setInputList(data);
   }
 
   return (
@@ -53,41 +37,93 @@ function AddWord() {
       {isLoading && <Loading />}
       {!isLoading && (
         <div className="add-word-form">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formWord">
-              <Form.Label>Word:</Form.Label>
-              <Form.Control
-                type="text"
-                value={word}
-                onChange={(e) => setWord(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formsynonyms">
-              <Form.Label>Synonyms:</Form.Label>
-              {inputList.map((input, index) => (
-                <div key={index}>
-                  <Form.Control
+          <Formik
+            onSubmit={handleSubmit}
+            initialValues={{
+              word: "",
+              synonyms: [""],
+            }}
+            validate={(values) => {
+              let errors = {};
+              if (values.synonyms.length === 0)
+                errors.synonyms = "You must enter at least one synonym";
+
+              if (values.synonyms.some((x) => x.length < 2))
+                errors.synonyms =
+                  "All synonyms must have at least two characters";
+
+              if (values.word.length < 2)
+                errors.word = "Word must have at least two characters";
+              return errors;
+            }}
+          >
+            {({ values, errors, touched, handleBlur, handleChange }) => (
+              <Form>
+                <div className="row">
+                  <label>Word:</label>
+                  <TextField
                     type="text"
-                    value={input}
-                    onKeyDown={handleKeyDown}
-                    onChange={(e) => handleChange(index, e)}
-                  ></Form.Control>
-                  <br />
+                    id="word"
+                    name="word"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.word}
+                  />
+                  <div className="validation-error">
+                    {errors.word && touched.word && errors.word}
+                  </div>
                 </div>
-              ))}
-              <div className="add-synonym-button-wrapper">
-                <Button variant="light" type="button" onClick={addNewSynonym}>
-                  + Add new synonym
-                </Button>
-              </div>
-            </Form.Group>
-            <hr></hr>
-            <div className="add-word-button-wrapper">
-              <Button variant="primary" type="submit">
-                Add Word
-              </Button>
-            </div>
-          </Form>
+                <label>Synonyms:</label>
+                <FieldArray
+                  name="synonyms"
+                  render={({ push, remove }) => (
+                    <div>
+                      {values.synonyms.map((input, index) => (
+                        <div className="synonyms-wrapper" key={index}>
+                          <div className="input-synonyms">
+                            <Field
+                              className="input"
+                              type="text"
+                              id={`synonyms[${index}]`}
+                              name={`synonyms[${index}]`}
+                            />
+                          </div>
+                          <div className="button-synonyms">
+                            <Button
+                              variant="danger"
+                              type="button"
+                              onClick={() => remove(index)}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                          <br />
+                        </div>
+                      ))}
+                      <div className="validation-error">
+                        {errors.synonyms && touched.synonyms && errors.synonyms}
+                      </div>
+                      <div className="add-synonym-button-wrapper">
+                        <Button
+                          variant="light"
+                          type="button"
+                          onClick={() => push("")}
+                        >
+                          + Add new synonym
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                ></FieldArray>
+                <hr></hr>
+                <div className="add-word-button-wrapper">
+                  <Button variant="primary" type="submit">
+                    Add Word
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       )}
     </>

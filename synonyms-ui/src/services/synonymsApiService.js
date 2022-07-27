@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://localhost:7164/api/Synonyms";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const getAllWords = async () => {
   return axios.get(`${API_URL}`).then((res) => {
