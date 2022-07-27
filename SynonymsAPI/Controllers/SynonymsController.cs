@@ -19,39 +19,64 @@ namespace SynonymsAPI.Controllers
         [HttpGet]
         public ActionResult<Message> Get()
         {
-            var words = _synonymsService.Get();
-            return new Message()
+            try
             {
-                Data = words,
-                IsValid = true
-            };
+                var words = _synonymsService.Get();
+                return new Message()
+                {
+                    Data = words,
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
+
         }
 
         [HttpGet("search")]
         public ActionResult<Message> Get([FromQuery] string word)
         {
-            var words = _synonymsService.SearchByWord(word);
-            return new Message()
+            try
             {
-                Data = words,
-                IsValid = true
-            };
+                var words = _synonymsService.SearchByWord(word);
+                return new Message()
+                {
+                    Data = words,
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
         }
 
-       
-
-        //// GET api/<SynonymsController>/5
-        //[HttpGet("{id}")]
-        //public Task<string> Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<SynonymsController>
         [HttpPost]
-        public ActionResult<bool> Post(WordDto word)
+        public ActionResult<Message> Post(WordDto word)
         {
-            return _synonymsService.Add(word.WordString, word.Synonyms.ToList());
+            try
+            {
+                _synonymsService.Add(word.WordString, word.Synonyms.ToList());
+                return new Message()
+                {
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
         }
     }
 }
