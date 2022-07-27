@@ -27,15 +27,17 @@ namespace SynonymsAPI.Services
             }
             else _words = words;
         }
+
         public List<WordDto> Get()
         {
-            let wordsDto = _words.Select(x => GetByWord(x.WordString)).OrderBy(x => x.WordString).ToList();
+            var wordsDto = _words.Select(x => GetByWord(x.WordString)).OrderBy(x => x.WordString).ToList();
             return wordsDto;
         }
+
         public WordDto? GetByWord(string word)
         {
             //Get all synonyms for that word
-            var wordWithSynonyms = _words.FirstOrDefault(x => x.WordString == word);
+            var wordWithSynonyms = _words.FirstOrDefault(x => x.WordString == word.ToLower());
 
             //Word not found
             if (wordWithSynonyms == null) return null;
@@ -72,7 +74,6 @@ namespace SynonymsAPI.Services
             }
             return wordsList.OrderBy(x => x.WordString).ToList();
         }
-
 
         private List<string> GetSynonymWords(Word initialWord)
         {
