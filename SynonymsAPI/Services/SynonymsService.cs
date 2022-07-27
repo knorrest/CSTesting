@@ -29,7 +29,7 @@ namespace SynonymsAPI.Services
         }
         public List<WordDto> Get()
         {
-            var wordsDto = _words.Select(x => GetByWord(x.WordString)).ToList();
+            let wordsDto = _words.Select(x => GetByWord(x.WordString)).OrderBy(x => x.WordString).ToList();
             return wordsDto;
         }
         public WordDto? GetByWord(string word)
@@ -70,7 +70,7 @@ namespace SynonymsAPI.Services
                 };
                 wordsList.Add(wordDto);
             }
-            return wordsList;
+            return wordsList.OrderBy(x => x.WordString).ToList();
         }
 
 
