@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./wordSearch.css";
 import { debounce } from "lodash";
-import { Table } from "react-bootstrap";
 
 import { getWordSynonyms } from "../../services/synonymsApiService";
 import Loading from "../Shared/Loading";
 import TextField from "../Form/textField";
+import TableWithSynonyms from "../Shared/TableWithSynonyms/TableWithSynonyms";
 
 function WordSearch() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,6 +13,7 @@ function WordSearch() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async (searchTerm) => {
+    if (searchTerm === "") return;
     setIsLoading(true);
     try {
       let words = await getWordSynonyms(searchTerm);
@@ -30,31 +31,11 @@ function WordSearch() {
     setSearchTerm(event.target.value);
     debounceFn(event.target.value);
   }
-
-  const getTableWithData = () => {
-    return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Word</th>
-            <th>Synonyms</th>
-          </tr>
-        </thead>
-        <tbody>
-          {wordList.map((word) => (
-            <tr key={word.id}>
-              <td>{word.wordString}</td>
-              <td>{word.synonyms.toString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    );
-  };
   return (
     <>
       <p>Find synonyms for word:</p>
       <TextField
+        className="search-field"
         type="text"
         id="word"
         name="word"
@@ -62,7 +43,9 @@ function WordSearch() {
         onChange={handleChange}
       />
       {isLoading && <Loading />}
-      {!isLoading && wordList.length > 0 && <>{getTableWithData()}</>}
+      {!isLoading && searchTerm && wordList.length > 0 && (
+        <TableWithSynonyms wordList={wordList} />
+      )}
       {!isLoading && searchTerm && wordList.length === 0 && (
         <div className="no-items">
           <p>Sorry, we found no synonyms for "{searchTerm}"</p>

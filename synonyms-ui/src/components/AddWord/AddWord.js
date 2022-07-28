@@ -29,11 +29,6 @@ function AddWord() {
 
   return (
     <>
-      <p>
-        Add a new word with synonyms. You can easily add multiple synonyms for
-        the same word. If you add existing word, synonyms will merge with the
-        existing one. Type one synonym in each box. Words are case insensitive.
-      </p>
       {isLoading && <Loading />}
       {!isLoading && (
         <div className="add-word-form">
@@ -59,6 +54,12 @@ function AddWord() {
           >
             {({ values, errors, touched, handleBlur, handleChange }) => (
               <Form>
+                <p>
+                  Add a new word with synonyms. You can easily add multiple
+                  synonyms for the same word. If you add existing word, synonyms
+                  will merge with the existing one. Type one synonym in each
+                  box. Words are case insensitive.
+                </p>
                 <div className="row">
                   <label>Word:</label>
                   <TextField
