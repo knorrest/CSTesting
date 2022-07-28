@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SynonymsAPI.DTOs;
 using SynonymsAPI.Interfaces;
+using SynonymsDB;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,37 +16,67 @@ namespace SynonymsAPI.Controllers
             _synonymsService = synonymsService;
         }
 
-        // GET: api/<SynonymsController>
         [HttpGet]
-        public async Task<WordSynonymsDto> Get(string word)
+        public ActionResult<Message> Get()
         {
-            return await _synonymsService.GetAsync(word);
+            try
+            {
+                var words = _synonymsService.Get();
+                return new Message()
+                {
+                    Data = words,
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
+
         }
 
-        //// GET api/<SynonymsController>/5
-        //[HttpGet("{id}")]
-        //public Task<string> Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet("search")]
+        public ActionResult<Message> Get([FromQuery] string word)
+        {
+            try
+            {
+                var words = _synonymsService.SearchByWord(word);
+                return new Message()
+                {
+                    Data = words,
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
+        }
 
-        // POST api/<SynonymsController>
         [HttpPost]
-        public async Task<bool> Post(string word, string synonym)
+        public ActionResult<Message> Post(WordDto word)
         {
-            return await _synonymsService.AddAsync(word, synonym);
-        }
-
-        // PUT api/<SynonymsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<SynonymsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                _synonymsService.Add(word.WordString, word.Synonyms.ToList());
+                return new Message()
+                {
+                    IsValid = true
+                };
+            }
+            catch (Exception)
+            {
+                return new Message()
+                {
+                    IsValid = false
+                };
+            }
         }
     }
 }

@@ -1,0 +1,12 @@
+.table-synonyms {
+    display: flex;
+  }
+  
+  .table-synonym {
+    border-radius: 100px;
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: #c5f5e4;
+    cursor: pointer;
+  }
+  

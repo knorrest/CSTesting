@@ -1,0 +1,13 @@
+.no-items {
+  margin: 50px;
+  text-align: center;
+}
+
+.search-field {
+  width: 500px;
+  margin: auto;
+}
+
+.search-header{
+  text-align: center;
+}

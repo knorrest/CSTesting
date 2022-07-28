@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynonymsAPI", "SynonymsAPI\SynonymsAPI.csproj", "{FC1C7162-FFD6-4507-A716-ABDF01B20F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynonymsAPI", "SynonymsAPI\SynonymsAPI.csproj", "{FC1C7162-FFD6-4507-A716-ABDF01B20F85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynonymsDB", "SynonymsDB\SynonymsDB.csproj", "{77CBB086-FF48-4DD2-A27D-809C65855162}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C710FFC6-C2F1-4B14-8521-A6FDC04ACC1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FC1C7162-FFD6-4507-A716-ABDF01B20F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1C7162-FFD6-4507-A716-ABDF01B20F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1C7162-FFD6-4507-A716-ABDF01B20F85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77CBB086-FF48-4DD2-A27D-809C65855162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77CBB086-FF48-4DD2-A27D-809C65855162}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77CBB086-FF48-4DD2-A27D-809C65855162}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77CBB086-FF48-4DD2-A27D-809C65855162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C710FFC6-C2F1-4B14-8521-A6FDC04ACC1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C710FFC6-C2F1-4B14-8521-A6FDC04ACC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C710FFC6-C2F1-4B14-8521-A6FDC04ACC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C710FFC6-C2F1-4B14-8521-A6FDC04ACC1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
