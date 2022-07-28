@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Caching.Memory;
 using SynonymsAPI.Interfaces;
 using SynonymsDB;
-using System.Linq;
 
 namespace SynonymsAPI.Services
 {
