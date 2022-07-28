@@ -5,6 +5,10 @@ function TextField(props) {
   const { id, label, className, value, placeholder, disabled } = props;
 
   const handleChange = (e) => {
+    if (e.target.value === " ") {
+      e.preventDefault();
+      return;
+    }
     props.onChange(e);
   };
 

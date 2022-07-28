@@ -47,7 +47,10 @@ function AddWord() {
                 errors.synonyms =
                   "All synonyms must have at least two characters";
 
-              if (values.synonyms.some((x) => x === values.word))
+              if (
+                values.word !== "" &&
+                values.synonyms.some((x) => x === values.word)
+              )
                 errors.synonyms = "Synonym should not be the same as word";
 
               if (values.word.length < 2)
@@ -85,11 +88,13 @@ function AddWord() {
                       {values.synonyms.map((input, index) => (
                         <div className="synonyms-wrapper" key={index}>
                           <div className="input-synonyms">
-                            <Field
-                              className="input"
+                            <TextField
                               type="text"
                               id={`synonyms[${index}]`}
                               name={`synonyms[${index}]`}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.synonyms[index]}
                             />
                           </div>
                           <div className="button-synonyms">

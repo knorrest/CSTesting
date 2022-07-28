@@ -35,6 +35,16 @@ namespace Test
         [Test]
         public void GetByWord_WordHouse_ShouldReturnSameWordCount()
         {
+            const string word = "otorhinolaryngology";
+
+            var result = _synonymsService.GetByWord(word);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetByWord_WordNotFound_ShouldReturnNull()
+        {
             const string word = "house";
             var wordSynonyms = _initialWords.FirstOrDefault(x => x.WordString == word);
 
@@ -52,6 +62,16 @@ namespace Test
             var result = _synonymsService.SearchByWord(word);
 
             Assert.That(result, Has.Count.EqualTo(searchedResults.Count));
+        }
+
+        [Test]
+        public void SearchByWord_WordNotFound_ShouldReturnEmptyList()
+        {
+            const string word = "otorhinolaryngology";
+
+            var result = _synonymsService.SearchByWord(word);
+
+            Assert.That(result, Is.Empty);
         }
 
         [Test]
@@ -159,5 +179,29 @@ namespace Test
                 Assert.That(initialWordsCount, Is.EqualTo(newArray.Count));
             });
         }
+
+
+        [Test]
+        public void AddWord_WordsAndSynonymsAreEmptyStrings_ShouldAddAllWords()
+        {
+            var newWord = "  ";
+            var synonyms = new List<string>() { " ", "    " };
+
+            var addResult = _synonymsService.Add(newWord, synonyms);
+
+            Assert.That(addResult, Is.False);
+        }
+
+        [Test]
+        public void AddWord_SynonymsListEmpty_ShouldAddAllWords()
+        {
+            var newWord = "otorhinolaryngology";
+            var synonyms = new List<string>();
+
+            var addResult = _synonymsService.Add(newWord, synonyms);
+
+            Assert.That(addResult, Is.False);
+        }
+
     }
 }
