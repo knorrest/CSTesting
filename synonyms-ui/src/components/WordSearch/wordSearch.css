@@ -5,4 +5,9 @@
 
 .search-field {
   width: 500px;
+  margin: auto;
+}
+
+.search-header{
+  text-align: center;
 }

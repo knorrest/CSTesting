@@ -33,15 +33,17 @@ function WordSearch() {
   }
   return (
     <>
-      <p>Find synonyms for word:</p>
-      <TextField
-        className="search-field"
-        type="text"
-        id="word"
-        name="word"
-        value={searchTerm}
-        onChange={handleChange}
-      />
+      <div className="search-header">
+        <p>Find synonyms for word:</p>
+        <TextField
+          className="search-field"
+          type="text"
+          id="word"
+          name="word"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
       {isLoading && <Loading />}
       {!isLoading && searchTerm && wordList.length > 0 && (
         <TableWithSynonyms wordList={wordList} />

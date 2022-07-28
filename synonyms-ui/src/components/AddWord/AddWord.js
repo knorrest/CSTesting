@@ -47,6 +47,9 @@ function AddWord() {
                 errors.synonyms =
                   "All synonyms must have at least two characters";
 
+              if (values.synonyms.some((x) => x === values.word))
+                errors.synonyms = "Synonym should not be the same as word";
+
               if (values.word.length < 2)
                 errors.word = "Word must have at least two characters";
               return errors;
