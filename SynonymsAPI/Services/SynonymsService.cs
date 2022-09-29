@@ -91,6 +91,25 @@ namespace SynonymsAPI.Services
         {
             try
             {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    
+                }
                 //Remove all empty strings, or synonyms that are equal to word, and get Distinct values
                 synonyms.RemoveAll(s => string.IsNullOrWhiteSpace(s) || s == word);
                 synonyms = synonyms.Distinct().ToList();
