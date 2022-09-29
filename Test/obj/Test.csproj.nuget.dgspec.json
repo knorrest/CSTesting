@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\Test\\Test.csproj": {}
+    "D:\\Repos\\CSTesting\\Test\\Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {
+    "D:\\Repos\\CSTesting\\SynonymsAPI\\SynonymsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
+        "projectUniqueName": "D:\\Repos\\CSTesting\\SynonymsAPI\\SynonymsAPI.csproj",
         "projectName": "SynonymsAPI",
-        "projectPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj",
-        "packagesPath": "C:\\Users\\IrmaDzemidzic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\obj\\",
+        "projectPath": "D:\\Repos\\CSTesting\\SynonymsAPI\\SynonymsAPI.csproj",
+        "packagesPath": "C:\\Users\\irmad\\.nuget\\packages\\",
+        "outputPath": "D:\\Repos\\CSTesting\\SynonymsAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\IrmaDzemidzic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\irmad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,7 +75,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -90,24 +88,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\Test\\Test.csproj": {
+    "D:\\Repos\\CSTesting\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\Test\\Test.csproj",
+        "projectUniqueName": "D:\\Repos\\CSTesting\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\Test\\Test.csproj",
-        "packagesPath": "C:\\Users\\IrmaDzemidzic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\Test\\obj\\",
+        "projectPath": "D:\\Repos\\CSTesting\\Test\\Test.csproj",
+        "packagesPath": "C:\\Users\\irmad\\.nuget\\packages\\",
+        "outputPath": "D:\\Repos\\CSTesting\\Test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\IrmaDzemidzic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\irmad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -121,8 +116,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj": {
-                "projectPath": "C:\\Users\\IrmaDzemidzic\\Repositories\\Synonyms\\SynonymsAPI\\SynonymsAPI.csproj"
+              "D:\\Repos\\CSTesting\\SynonymsAPI\\SynonymsAPI.csproj": {
+                "projectPath": "D:\\Repos\\CSTesting\\SynonymsAPI\\SynonymsAPI.csproj"
               }
             }
           }
@@ -164,7 +159,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -173,7 +169,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
