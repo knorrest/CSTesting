@@ -167,6 +167,37 @@ namespace SynonymsAPI.Services
             }
         }
 
+        public bool Add(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private void UpdateAllSynonymsOfSynonyms(List<long> allSynonymIds)
         {
             _words.Where(x => allSynonymIds.Contains(x.Id)).Select(x =>
