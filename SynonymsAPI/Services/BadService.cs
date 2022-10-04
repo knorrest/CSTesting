@@ -29,7 +29,14 @@ namespace SynonymsAPI.Services
                 }
                 else if (word == "C")
                 {
+                    if (word == "BA")
+                    {
 
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
                 }
                 return true;
             }
@@ -60,7 +67,14 @@ namespace SynonymsAPI.Services
                 }
                 else if (word == "C")
                 {
+                    if (word == "BA")
+                    {
 
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
                 }
                 return true;
             }
@@ -208,6 +222,5 @@ namespace SynonymsAPI.Services
                 return false;
             }
         }
-
     }
 }
