@@ -214,7 +214,10 @@ namespace SynonymsAPI.Services
                     }
                     else if (word == "BB")
                     {
+                        if (word == "A")
+                        {
 
+                        }
                     }
                 }
                 else if (word == "C")

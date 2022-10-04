@@ -20,7 +20,10 @@ namespace SynonymsAPI.Services
                 {
                     if (word == "BA")
                     {
+                        if (word == "A")
+                        {
 
+                        }
                     }
                     else if (word == "BB")
                     {
@@ -73,7 +76,10 @@ namespace SynonymsAPI.Services
                     }
                     else if (word == "BB")
                     {
+                        if (word == "A")
+                        {
 
+                        }
                     }
                 }
                 return true;
@@ -100,7 +106,10 @@ namespace SynonymsAPI.Services
                     }
                     else if (word == "BB")
                     {
+                        if (word == "A")
+                        {
 
+                        }
                     }
                 }
                 else if (word == "C")
@@ -123,6 +132,10 @@ namespace SynonymsAPI.Services
                 {
                     if (word == "A")
                     {
+                        if (word == "A")
+                        {
+
+                        }
 
                     }
                     else if (word.Contains("B"))
