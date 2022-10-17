@@ -97,28 +97,7 @@ namespace SynonymsAPI.Services
                 }
                 else if (word.Contains("B"))
                 {
-                    if (word == "BA")
-                    {
-
-                    }
-                    else if (word == "BB")
-                    {
-                        if (word == "BA")
-                        {
-
-                        }
-                        else if (word == "BB")
-                        {
-                            if (word == "BA")
-                            {
-
-                            }
-                            else if (word == "BB")
-                            {
-
-                            }
-                        }
-                    }
+                    
                 }
                 else if (word == "C")
                 {
