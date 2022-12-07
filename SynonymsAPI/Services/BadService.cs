@@ -8,6 +8,7 @@ namespace SynonymsAPI.Services
         {
 
         }
+        //codechecker_critical
         public bool Add(string word)
         {
             try
@@ -49,6 +50,7 @@ namespace SynonymsAPI.Services
             }
         }
 
+        //TODO refactor this
         public bool Add(string word, bool foo)
         {
             try
@@ -124,6 +126,7 @@ namespace SynonymsAPI.Services
             }
         }
 
+        //TODO one more
         public bool Add(string word, int foo)
         {
             try
@@ -237,6 +240,46 @@ namespace SynonymsAPI.Services
         }
 
         public decimal Calculate(decimal amount, int type, int years)
+        {
+            decimal result = 0;
+            decimal disc = (years > 5) ? (decimal)5 / 100 : (decimal)years / 100;
+            if (type == 1)
+            {
+                result = amount;
+                if (type == 1)
+                {
+                    result = amount;
+                }
+                else if (type == 2)
+                {
+                    result = (amount - (0.1m * amount)) - disc * (amount - (0.1m * amount));
+                }
+                else if (type == 3)
+                {
+                    result = (0.7m * amount) - disc * (0.7m * amount);
+                }
+                else if (type == 4)
+                {
+                    result = (amount - (0.5m * amount)) - disc * (amount - (0.5m * amount));
+                }
+                return result;
+            }
+            else if (type == 2)
+            {
+                result = (amount - (0.1m * amount)) - disc * (amount - (0.1m * amount));
+            }
+            else if (type == 3)
+            {
+                result = (0.7m * amount) - disc * (0.7m * amount);
+            }
+            else if (type == 4)
+            {
+                result = (amount - (0.5m * amount)) - disc * (amount - (0.5m * amount));
+            }
+            return result;
+        }
+
+        public decimal Calculate5(decimal amount, int type, int years)
         {
             decimal result = 0;
             decimal disc = (years > 5) ? (decimal)5 / 100 : (decimal)years / 100;

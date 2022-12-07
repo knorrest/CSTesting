@@ -16,6 +16,7 @@ namespace SynonymsAPI.Controllers
             _synonymsService = synonymsService;
         }
 
+        //codechecker_critical
         [HttpGet]
         public ActionResult<Message> Get()
         {
