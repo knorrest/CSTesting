@@ -8,6 +8,7 @@ namespace SynonymsAPI.Services
         {
 
         }
+        //codechecker_critical
         public bool Add(string word)
         {
             try
@@ -49,6 +50,7 @@ namespace SynonymsAPI.Services
             }
         }
 
+        //TODO refactor this
         public bool Add(string word, bool foo)
         {
             try
@@ -124,6 +126,7 @@ namespace SynonymsAPI.Services
             }
         }
 
+        //TODO one more
         public bool Add(string word, int foo)
         {
             try
