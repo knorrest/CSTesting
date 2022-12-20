@@ -92,6 +92,47 @@ namespace SynonymsAPI.Services
             }
         }
 
+        public bool Add(string word, bool foo, bool foo2)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Add(string word, string foo)
         {
             try
