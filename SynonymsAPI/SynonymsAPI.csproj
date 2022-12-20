@@ -21,4 +21,10 @@
     <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Services\even_worse.go" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\even_worse.cs" />
+  </ItemGroup>
 </Project>
