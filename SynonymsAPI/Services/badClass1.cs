@@ -2,11 +2,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Numerics;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
+using System.Xml.Linq;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -901,375 +908,6 @@ namespace Nop.Services.Common
             }
             doc.Add(productsTable);
         }
-
-        /// <summary>
-        /// Print addresses
-        /// </summary>
-        /// <param name="vendorId">Vendor identifier</param>
-        /// <param name="lang">Language</param>
-        /// <param name="titleFont">Title font</param>
-        /// <param name="order">Order</param>
-        /// <param name="font">Text font</param>
-        /// <param name="doc">Document</param>
-        protected virtual void PrintAddresses(int vendorId, Language lang, Font titleFont, Order order, Font font, Document doc)
-        {
-            var addressTable = new PdfPTable(2) { RunDirection = GetDirection(lang) };
-            addressTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            addressTable.WidthPercentage = 100f;
-            addressTable.SetWidths(new[] { 50, 50 });
-
-            //billing info
-            PrintBillingInfo(vendorId, lang, titleFont, order, font, addressTable);
-
-            //shipping info
-            PrintShippingInfo(lang, order, titleFont, font, addressTable);
-
-            doc.Add(addressTable);
-            doc.Add(new Paragraph(" "));
-        }
-
-        /// <summary>
-        /// Print shipping info
-        /// </summary>
-        /// <param name="lang">Language</param>
-        /// <param name="order">Order</param>
-        /// <param name="titleFont">Title font</param>
-        /// <param name="font">Text font</param>
-        /// <param name="addressTable">PDF table for address</param>
-        protected virtual void PrintShippingInfo(Language lang, Order order, Font titleFont, Font font, PdfPTable addressTable)
-        {
-            var shippingAddress = new PdfPTable(1)
-            {
-                RunDirection = GetDirection(lang)
-            };
-            shippingAddress.DefaultCell.Border = Rectangle.NO_BORDER;
-
-            if (order.ShippingStatus != ShippingStatus.ShippingNotRequired)
-            {
-                //cell = new PdfPCell();
-                //cell.Border = Rectangle.NO_BORDER;
-                const string indent = "   ";
-
-                if (!order.PickUpInStore)
-                {
-                    if (order.ShippingAddress == null)
-                        throw new NopException($"Shipping is required, but address is not available. Order ID = {order.Id}");
-
-                    shippingAddress.AddCell(GetParagraph("PDFInvoice.ShippingInformation", lang, titleFont));
-                    if (!string.IsNullOrEmpty(order.ShippingAddress.Company))
-                        shippingAddress.AddCell(GetParagraph("PDFInvoice.Company", indent, lang, font, order.ShippingAddress.Company));
-                    shippingAddress.AddCell(GetParagraph("PDFInvoice.Name", indent, lang, font, order.ShippingAddress.FirstName + " " + order.ShippingAddress.LastName));
-                    if (_addressSettings.PhoneEnabled)
-                        shippingAddress.AddCell(GetParagraph("PDFInvoice.Phone", indent, lang, font, order.ShippingAddress.PhoneNumber));
-                    if (_addressSettings.FaxEnabled && !string.IsNullOrEmpty(order.ShippingAddress.FaxNumber))
-                        shippingAddress.AddCell(GetParagraph("PDFInvoice.Fax", indent, lang, font, order.ShippingAddress.FaxNumber));
-                    if (_addressSettings.StreetAddressEnabled)
-                        shippingAddress.AddCell(GetParagraph("PDFInvoice.Address", indent, lang, font, order.ShippingAddress.Address1));
-                    if (_addressSettings.StreetAddress2Enabled && !string.IsNullOrEmpty(order.ShippingAddress.Address2))
-                        shippingAddress.AddCell(GetParagraph("PDFInvoice.Address2", indent, lang, font, order.ShippingAddress.Address2));
-                    if (_addressSettings.CityEnabled || _addressSettings.StateProvinceEnabled ||
-                        _addressSettings.CountyEnabled || _addressSettings.ZipPostalCodeEnabled)
-                    {
-                        var addressLine = $"{indent}{order.ShippingAddress.City}, " +
-                            $"{(!string.IsNullOrEmpty(order.ShippingAddress.County) ? $"{order.ShippingAddress.County}, " : string.Empty)}" +
-                            $"{(order.ShippingAddress.StateProvince?.GetLocalized(x => x.Name, lang.Id) ?? string.Empty)} " +
-                            $"{order.ShippingAddress.ZipPostalCode}";
-                        shippingAddress.AddCell(new Paragraph(addressLine, font));
-                    }
-                    if (_addressSettings.CountryEnabled && order.ShippingAddress.Country != null)
-                        shippingAddress.AddCell(
-                            new Paragraph(indent + order.ShippingAddress.Country.GetLocalized(x => x.Name, lang.Id), font));
-                    //custom attributes
-                    var customShippingAddressAttributes =
-                        _addressAttributeFormatter.FormatAttributes(order.ShippingAddress.CustomAttributes);
-                    if (!string.IsNullOrEmpty(customShippingAddressAttributes))
-                    {
-                        //TODO: we should add padding to each line (in case if we have several custom address attributes)
-                        shippingAddress.AddCell(new Paragraph(
-                            indent + HtmlHelper.ConvertHtmlToPlainText(customShippingAddressAttributes, true, true), font));
-                    }
-                    shippingAddress.AddCell(new Paragraph(" "));
-                }
-                else if (order.PickupAddress != null)
-                {
-                    shippingAddress.AddCell(GetParagraph("PDFInvoice.Pickup", lang, titleFont));
-                    if (!string.IsNullOrEmpty(order.PickupAddress.Address1))
-                        shippingAddress.AddCell(new Paragraph(
-                            $"{indent}{string.Format(_localizationService.GetResource("PDFInvoice.Address", lang.Id), order.PickupAddress.Address1)}",
-                            font));
-                    if (!string.IsNullOrEmpty(order.PickupAddress.City))
-                        shippingAddress.AddCell(new Paragraph($"{indent}{order.PickupAddress.City}", font));
-                    if (!string.IsNullOrEmpty(order.PickupAddress.County))
-                        shippingAddress.AddCell(new Paragraph($"{indent}{order.PickupAddress.County}", font));
-                    if (order.PickupAddress.Country != null)
-                        shippingAddress.AddCell(
-                            new Paragraph($"{indent}{order.PickupAddress.Country.GetLocalized(x => x.Name, lang.Id)}", font));
-                    if (!string.IsNullOrEmpty(order.PickupAddress.ZipPostalCode))
-                        shippingAddress.AddCell(new Paragraph($"{indent}{order.PickupAddress.ZipPostalCode}", font));
-                    shippingAddress.AddCell(new Paragraph(" "));
-                }
-                shippingAddress.AddCell(GetParagraph("PDFInvoice.ShippingMethod", indent, lang, font, order.ShippingMethod));
-                shippingAddress.AddCell(new Paragraph());
-
-                addressTable.AddCell(shippingAddress);
-            }
-            else
-            {
-                shippingAddress.AddCell(new Paragraph());
-                addressTable.AddCell(shippingAddress);
-            }
-        }
-
-        /// <summary>
-        /// Print billing info
-        /// </summary>
-        /// <param name="vendorId">Vendor identifier</param>
-        /// <param name="lang">Language</param>
-        /// <param name="titleFont">Title font</param>
-        /// <param name="order">Order</param>
-        /// <param name="font">Text font</param>
-        /// <param name="addressTable">Address PDF table</param>
-        protected virtual void PrintBillingInfo(int vendorId, Language lang, Font titleFont, Order order, Font font, PdfPTable addressTable)
-        {
-            const string indent = "   ";
-            var billingAddress = new PdfPTable(1) { RunDirection = GetDirection(lang) };
-            billingAddress.DefaultCell.Border = Rectangle.NO_BORDER;
-
-            billingAddress.AddCell(GetParagraph("PDFInvoice.BillingInformation", lang, titleFont));
-
-            if (_addressSettings.CompanyEnabled && !string.IsNullOrEmpty(order.BillingAddress.Company))
-                billingAddress.AddCell(GetParagraph("PDFInvoice.Company", indent, lang, font, order.BillingAddress.Company));
-
-            billingAddress.AddCell(GetParagraph("PDFInvoice.Name", indent, lang, font, order.BillingAddress.FirstName + " " + order.BillingAddress.LastName));
-            if (_addressSettings.PhoneEnabled)
-                billingAddress.AddCell(GetParagraph("PDFInvoice.Phone", indent, lang, font, order.BillingAddress.PhoneNumber));
-            if (_addressSettings.FaxEnabled && !string.IsNullOrEmpty(order.BillingAddress.FaxNumber))
-                billingAddress.AddCell(GetParagraph("PDFInvoice.Fax", indent, lang, font, order.BillingAddress.FaxNumber));
-            if (_addressSettings.StreetAddressEnabled)
-                billingAddress.AddCell(GetParagraph("PDFInvoice.Address", indent, lang, font, order.BillingAddress.Address1));
-            if (_addressSettings.StreetAddress2Enabled && !string.IsNullOrEmpty(order.BillingAddress.Address2))
-                billingAddress.AddCell(GetParagraph("PDFInvoice.Address2", indent, lang, font, order.BillingAddress.Address2));
-            if (_addressSettings.CityEnabled || _addressSettings.StateProvinceEnabled ||
-                _addressSettings.CountyEnabled || _addressSettings.ZipPostalCodeEnabled)
-            {
-                var addressLine = $"{indent}{order.BillingAddress.City}, " +
-                    $"{(!string.IsNullOrEmpty(order.BillingAddress.County) ? $"{order.BillingAddress.County}, " : string.Empty)}" +
-                    $"{(order.BillingAddress.StateProvince?.GetLocalized(x => x.Name, lang.Id) ?? string.Empty)} " +
-                    $"{order.BillingAddress.ZipPostalCode}";
-                billingAddress.AddCell(new Paragraph(addressLine, font));
-            }
-            if (_addressSettings.CountryEnabled && order.BillingAddress.Country != null)
-                billingAddress.AddCell(new Paragraph(indent + order.BillingAddress.Country.GetLocalized(x => x.Name, lang.Id),
-                    font));
-
-            //VAT number
-            if (!string.IsNullOrEmpty(order.VatNumber))
-                billingAddress.AddCell(GetParagraph("PDFInvoice.VATNumber", indent, lang, font, order.VatNumber));
-
-            //custom attributes
-            var customBillingAddressAttributes =
-                _addressAttributeFormatter.FormatAttributes(order.BillingAddress.CustomAttributes);
-            if (!string.IsNullOrEmpty(customBillingAddressAttributes))
-            {
-                //TODO: we should add padding to each line (in case if we have several custom address attributes)
-                billingAddress.AddCell(
-                    new Paragraph(indent + HtmlHelper.ConvertHtmlToPlainText(customBillingAddressAttributes, true, true), font));
-            }
-
-            //vendors payment details
-            if (vendorId == 0)
-            {
-                //payment method
-                var paymentMethod = _paymentService.LoadPaymentMethodBySystemName(order.PaymentMethodSystemName);
-                var paymentMethodStr = paymentMethod != null
-                    ? paymentMethod.GetLocalizedFriendlyName(_localizationService, lang.Id)
-                    : order.PaymentMethodSystemName;
-                if (!string.IsNullOrEmpty(paymentMethodStr))
-                {
-                    billingAddress.AddCell(new Paragraph(" "));
-                    billingAddress.AddCell(GetParagraph("PDFInvoice.PaymentMethod", indent, lang, font, paymentMethodStr));
-                    billingAddress.AddCell(new Paragraph());
-                }
-
-                //custom values
-                var customValues = order.DeserializeCustomValues();
-                if (customValues != null)
-                {
-                    foreach (var item in customValues)
-                    {
-                        billingAddress.AddCell(new Paragraph(" "));
-                        billingAddress.AddCell(new Paragraph(indent + item.Key + ": " + item.Value, font));
-                        billingAddress.AddCell(new Paragraph());
-                    }
-                }
-            }
-            addressTable.AddCell(billingAddress);
-        }
-
-        /// <summary>
-        /// Print header
-        /// </summary>
-        /// <param name="pdfSettingsByStore">PDF settings</param>
-        /// <param name="lang">Language</param>
-        /// <param name="order">Order</param>
-        /// <param name="font">Text font</param>
-        /// <param name="titleFont">Title font</param>
-        /// <param name="doc">Document</param>
-        protected virtual void PrintHeader(PdfSettings pdfSettingsByStore, Language lang, Order order, Font font, Font titleFont, Document doc)
-        {
-            //logo
-            var logoPicture = _pictureService.GetPictureById(pdfSettingsByStore.LogoPictureId);
-            var logoExists = logoPicture != null;
-
-            //header
-            var headerTable = new PdfPTable(logoExists ? 2 : 1)
-            {
-                RunDirection = GetDirection(lang)
-            };
-            headerTable.DefaultCell.Border = Rectangle.NO_BORDER;
-
-            //store info
-            var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
-            var anchor = new Anchor(store.Url.Trim('/'), font)
-            {
-                Reference = store.Url
-            };
-
-            var cellHeader = GetPdfCell(string.Format(_localizationService.GetResource("PDFInvoice.Order#", lang.Id), order.CustomOrderNumber), titleFont);
-            cellHeader.Phrase.Add(new Phrase(Environment.NewLine));
-            cellHeader.Phrase.Add(new Phrase(anchor));
-            cellHeader.Phrase.Add(new Phrase(Environment.NewLine));
-            cellHeader.Phrase.Add(GetParagraph("PDFInvoice.OrderDate", lang, font, _dateTimeHelper.ConvertToUserTime(order.CreatedOnUtc, DateTimeKind.Utc).ToString("D", new CultureInfo(lang.LanguageCulture))));
-            cellHeader.Phrase.Add(new Phrase(Environment.NewLine));
-            cellHeader.Phrase.Add(new Phrase(Environment.NewLine));
-            cellHeader.HorizontalAlignment = Element.ALIGN_LEFT;
-            cellHeader.Border = Rectangle.NO_BORDER;
-
-            headerTable.AddCell(cellHeader);
-
-            if (logoExists)
-                headerTable.SetWidths(lang.Rtl ? new[] { 0.2f, 0.8f } : new[] { 0.8f, 0.2f });
-            headerTable.WidthPercentage = 100f;
-
-            //logo               
-            if (logoExists)
-            {
-                var logoFilePath = _pictureService.GetThumbLocalPath(logoPicture, 0, false);
-                var logo = Image.GetInstance(logoFilePath);
-                logo.Alignment = GetAlignment(lang, true);
-                logo.ScaleToFit(65f, 65f);
-
-                var cellLogo = new PdfPCell { Border = Rectangle.NO_BORDER };
-                cellLogo.AddElement(logo);
-                headerTable.AddCell(cellLogo);
-            }
-            doc.Add(headerTable);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Print an order to PDF
-        /// </summary>
-        /// <param name="order">Order</param>
-        /// <param name="languageId">Language identifier; 0 to use a language used when placing an order</param>
-        /// <param name="vendorId">Vendor identifier to limit products; 0 to to print all products. If specified, then totals won't be printed</param>
-        /// <returns>A path of generated file</returns>
-        public virtual string PrintOrderToPdf(Order order, int languageId = 0, int vendorId = 0)
-        {
-            if (order == null)
-                throw new ArgumentNullException(nameof(order));
-
-            var fileName = $"order_{order.OrderGuid}_{CommonHelper.GenerateRandomDigitCode(4)}.pdf";
-            var filePath = _fileProvider.Combine(_fileProvider.MapPath("~/wwwroot/files/exportimport"), fileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                var orders = new List<Order> { order };
-                PrintOrdersToPdf(fileStream, orders, languageId, vendorId);
-            }
-            return filePath;
-        }
-
-        /// <summary>
-        /// Print orders to PDF
-        /// </summary>
-        /// <param name="stream">Stream</param>
-        /// <param name="orders">Orders</param>
-        /// <param name="languageId">Language identifier; 0 to use a language used when placing an order</param>
-        /// <param name="vendorId">Vendor identifier to limit products; 0 to to print all products. If specified, then totals won't be printed</param>
-        public virtual void PrintOrdersToPdf(Stream stream, IList<Order> orders, int languageId = 0, int vendorId = 0)
-        {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
-
-            if (orders == null)
-                throw new ArgumentNullException(nameof(orders));
-
-            var pageSize = PageSize.A4;
-
-            if (_pdfSettings.LetterPageSizeEnabled)
-            {
-                pageSize = PageSize.LETTER;
-            }
-
-            var doc = new Document(pageSize);
-            var pdfWriter = PdfWriter.GetInstance(doc, stream);
-            doc.Open();
-
-            //fonts
-            var titleFont = GetFont();
-            titleFont.SetStyle(Font.BOLD);
-            titleFont.Color = BaseColor.BLACK;
-            var font = GetFont();
-            var attributesFont = GetFont();
-            attributesFont.SetStyle(Font.ITALIC);
-
-            var ordCount = orders.Count;
-            var ordNum = 0;
-
-            foreach (var order in orders)
-            {
-                //by default _pdfSettings contains settings for the current active store
-                //and we need PdfSettings for the store which was used to place an order
-                //so let's load it based on a store of the current order
-                var pdfSettingsByStore = _settingService.LoadSetting<PdfSettings>(order.StoreId);
-
-                var lang = _languageService.GetLanguageById(languageId == 0 ? order.CustomerLanguageId : languageId);
-                if (lang == null || !lang.Published)
-                    lang = _workContext.WorkingLanguage;
-
-                //header
-                PrintHeader(pdfSettingsByStore, lang, order, font, titleFont, doc);
-
-                //addresses
-                PrintAddresses(vendorId, lang, titleFont, order, font, doc);
-
-                //products
-                PrintProducts(vendorId, lang, titleFont, doc, order, font, attributesFont);
-
-                //checkout attributes
-                PrintCheckoutAttributes(vendorId, order, doc, lang, font);
-
-                //totals
-                PrintTotals(vendorId, lang, order, font, titleFont, doc);
-
-                //order notes
-                PrintOrderNotes(pdfSettingsByStore, order, lang, titleFont, doc, font);
-
-                //footer
-                PrintFooter(pdfSettingsByStore, pdfWriter, pageSize, lang, font);
-
-                ordNum++;
-                if (ordNum < ordCount)
-                {
-                    doc.NewPage();
-                }
-            }
-            doc.Close();
-        }
-
         /// <summary>
         /// Print packaging slips to PDF
         /// </summary>
@@ -1586,24 +1224,24 @@ namespace Nop.Services.Common
                         productTable.AddCell(new Paragraph(" "));
 
                         //uncomment to render associated product description
-                        //string apDescription = associatedProduct.GetLocalized(x => x.ShortDescription, lang.Id);
-                        //if (!string.IsNullOrEmpty(apDescription))
-                        //{
-                        //    productTable.AddCell(new Paragraph(HtmlHelper.StripTags(HtmlHelper.ConvertHtmlToPlainText(apDescription)), font));
-                        //    productTable.AddCell(new Paragraph(" "));
-                        //}
+                        string apDescription = associatedProduct.GetLocalized(x => x.ShortDescription, lang.Id);
+                        if (!string.IsNullOrEmpty(apDescription))
+                        {
+                            productTable.AddCell(new Paragraph(HtmlHelper.StripTags(HtmlHelper.ConvertHtmlToPlainText(apDescription)), font));
+                            productTable.AddCell(new Paragraph(" "));
+                        }
 
                         //uncomment to render associated product picture
-                        //var apPicture = _pictureService.GetPicturesByProductId(associatedProduct.Id).FirstOrDefault();
-                        //if (apPicture != null)
-                        //{
-                        //    var picBinary = _pictureService.LoadPictureBinary(apPicture);
-                        //    if (picBinary != null && picBinary.Length > 0)
-                        //    {
-                        //        var pictureLocalPath = _pictureService.GetThumbLocalPath(apPicture, 200, false);
-                        //        productTable.AddCell(Image.GetInstance(pictureLocalPath));
-                        //    }
-                        //}
+                        var apPicture = _pictureService.GetPicturesByProductId(associatedProduct.Id).FirstOrDefault();
+                        if (apPicture != null)
+                        {
+                            var picBinary = _pictureService.LoadPictureBinary(apPicture);
+                            if (picBinary != null && picBinary.Length > 0)
+                            {
+                                var pictureLocalPath = _pictureService.GetThumbLocalPath(apPicture, 200, false);
+                                productTable.AddCell(Image.GetInstance(pictureLocalPath));
+                            }
+                        }
 
                         productTable.AddCell(new Paragraph($"{_localizationService.GetResource("PDFProductCatalog.Price", lang.Id)}: {associatedProduct.Price:0.00} {_currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode}", font));
                         productTable.AddCell(new Paragraph($"{_localizationService.GetResource("PDFProductCatalog.SKU", lang.Id)}: {associatedProduct.Sku}", font));
