@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DI0y0YiKR9pbH3MN9QIiCuuBsSMYCcua6w1GGxXsRQMAdxVPqKyzEobYn3MMz7Twy2Mx7yf2dudf/LDEC3bSvg==",
+  "dgSpecHash": "DPR3ugmjuAUW+A9Il9aQmLA2b9Zdy8Lk0Ll74cCaADYSrcQABdTeBla98gG41XEP6Lr8uMAyaAxnqfPt/1oluw==",
   "success": true,
-  "projectFilePath": "/Users/irmadzemidzic/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
+  "projectFilePath": "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
   "expectedPackageFiles": [
     "/Users/irmadzemidzic/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/irmadzemidzic/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
