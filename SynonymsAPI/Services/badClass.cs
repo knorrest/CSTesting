@@ -1797,6 +1797,8 @@ namespace Nop.Services.ExportImport
             return count;
         }
 
+        string someChanges = "some changes";
+
         /// <summary>
         /// Import states from TXT file
         /// </summary>
