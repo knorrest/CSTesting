@@ -80,6 +80,7 @@ namespace SynonymsAPI.Services
                     {
                         if (word == "A")
                         {
+                            string someChanges = "some changes";
 
                         }
                     }
@@ -108,6 +109,7 @@ namespace SynonymsAPI.Services
                     }
                     else if (word == "BB")
                     {
+                        string someChanges = "some changes";
 
                     }
                 }
