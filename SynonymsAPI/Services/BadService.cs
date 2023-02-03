@@ -280,6 +280,211 @@ namespace SynonymsAPI.Services
             }
         }
 
+        public bool Add1(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Add_1(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Add_Test(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Add_Test1(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Add_Test_123(string word)
+        {
+            try
+            {
+                if (word == "A")
+                {
+
+                }
+                else if (word.Contains("B"))
+                {
+                    if (word == "BA")
+                    {
+                        if (word == "A")
+                        {
+
+                        }
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                else if (word == "C")
+                {
+                    if (word == "BA")
+                    {
+
+                    }
+                    else if (word == "BB")
+                    {
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public decimal Calculate(decimal amount, int type, int years)
         {
             decimal result = 0;
