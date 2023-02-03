@@ -321,7 +321,7 @@ namespace SynonymsAPI.Services
             }
         }
 
-        public bool Add_1(string word)
+        public bool Add_1x(string word)
         {
             try
             {
@@ -603,6 +603,11 @@ namespace SynonymsAPI.Services
                 result = (amount - (0.5m * amount)) - disc * (amount - (0.5m * amount));
             }
             return result;
+        }
+
+        public void NoOverloadsMethod()
+        {
+
         }
     }
 }
