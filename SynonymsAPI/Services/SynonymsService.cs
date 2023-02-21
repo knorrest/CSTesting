@@ -105,7 +105,39 @@ namespace SynonymsAPI.Services
                     {
                         if (word == "BA")
                         {
+                            if (word == "A")
+                            {
 
+                            }
+                            else if (word.Contains("B"))
+                            {
+                                if (word == "BA")
+                                {
+
+                                }
+                                else if (word == "BB")
+                                {
+                                    if (word == "BA")
+                                    {
+
+                                    }
+                                    else if (word == "BB")
+                                    {
+                                        if (word == "BA")
+                                        {
+
+                                        }
+                                        else if (word == "BB")
+                                        {
+
+                                        }
+                                    }
+                                }
+                            }
+                            else if (word == "C")
+                            {
+
+                            }
                         }
                         else if (word == "BB")
                         {
@@ -224,7 +256,39 @@ namespace SynonymsAPI.Services
                 {
                     if (word == "BA")
                     {
+                        if (word == "A")
+                        {
 
+                        }
+                        else if (word.Contains("B"))
+                        {
+                            if (word == "BA")
+                            {
+
+                            }
+                            else if (word == "BB")
+                            {
+                                if (word == "BA")
+                                {
+
+                                }
+                                else if (word == "BB")
+                                {
+                                    if (word == "BA")
+                                    {
+
+                                    }
+                                    else if (word == "BB")
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
+                        else if (word == "C")
+                        {
+
+                        }
                     }
                     else if (word == "BB")
                     {
