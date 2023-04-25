@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/irmadzemidzic/CSTesting/SynonymsAPI/SynonymsAPI.csproj": {}
+    "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/SynonymsAPI.csproj": {}
   },
   "projects": {
-    "/Users/irmadzemidzic/CSTesting/SynonymsAPI/SynonymsAPI.csproj": {
+    "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/SynonymsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/irmadzemidzic/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
+        "projectUniqueName": "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
         "projectName": "SynonymsAPI",
-        "projectPath": "/Users/irmadzemidzic/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
+        "projectPath": "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/SynonymsAPI.csproj",
         "packagesPath": "/Users/irmadzemidzic/.nuget/packages/",
-        "outputPath": "/Users/irmadzemidzic/CSTesting/SynonymsAPI/obj/",
+        "outputPath": "/Users/irmadzemidzic/codeSceneRepos/CSTesting/SynonymsAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/irmadzemidzic/.nuget/NuGet/NuGet.Config"
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
