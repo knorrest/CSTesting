@@ -466,7 +466,7 @@ namespace SynonymsAPI.Services
 
                     }
                 }
-                else if (word == "C")
+                else if (word == "A")
                 {
                     if (word == "BA")
                     {
@@ -479,6 +479,7 @@ namespace SynonymsAPI.Services
                 }
                 return true;
             }
+
             catch (Exception)
             {
                 return false;
