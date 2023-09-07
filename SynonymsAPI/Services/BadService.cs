@@ -526,6 +526,7 @@ namespace SynonymsAPI.Services
             return result;
         }
 
+        @CodeScene(disable:\"Complex Method\")
         public decimal Calculate(decimal amount, int type, int years)
         {
             decimal result = 0;
