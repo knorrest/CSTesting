@@ -87,8 +87,8 @@ namespace SynonymsAPI.Services
             return synonyms;
         }
 
-        @CodeScene(disable-all)
-       public bool Add(string word, List<string> synonyms)
+        //@CodeScene(disable-all)
+        public bool Add(string word, List<string> synonyms)
         {
             try
             {
