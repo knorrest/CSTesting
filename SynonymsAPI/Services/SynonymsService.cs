@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Caching.Memory;
 using SynonymsAPI.Interfaces;
 using SynonymsDB;
@@ -89,7 +88,7 @@ namespace SynonymsAPI.Services
         }
 
         @CodeScene(disable-all)
-       public bool Add(string word, List<string> synonyms)
+        public bool Add(string word, List<string> synonyms)
         {
             try
             {
@@ -114,6 +113,56 @@ namespace SynonymsAPI.Services
                             if (word == "BA")
                             {
 
+                            }
+                            else if (word.Contains("B"))
+                            {
+                                if (word == "BA")
+                                {
+
+                                }
+                                else if (word == "BB")
+                                {
+                                    if (word == "BA")
+                                    {
+
+                                    }
+                                    else if (word == "BB")
+                                    {
+                                        if (word == "BA")
+                                        {
+
+                                        }
+                                        else if (word.Contains("B"))
+                                        {
+                                            if (word == "BA")
+                                            {
+
+                                            }
+                                            else if (word == "BB")
+                                            {
+                                                if (word == "BA")
+                                                {
+
+                                                }
+                                                else if (word == "BB")
+                                                {
+                                                    if (word == "BA")
+                                                    {
+
+                                                    }
+                                                    else if (word == "BB")
+                                                    {
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (word == "BB")
+                                        {
+
+                                        }
+                                    }
+                                }
                             }
                             else if (word == "BB")
                             {
