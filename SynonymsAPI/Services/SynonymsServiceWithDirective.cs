@@ -87,6 +87,7 @@ namespace SynonymsAPI.Services
             return synonyms;
         }
 
+        // @CodeScene(disable:"Complex Method")
         public bool Add(string word, List<string> synonyms)
         {
             try
