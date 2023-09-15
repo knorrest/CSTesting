@@ -87,6 +87,7 @@ namespace SynonymsAPI.Services
             return synonyms;
         }
 
+        // @CodeScene(disable-all)
         public bool Add(string word, List<string> synonyms)
         {
             try
@@ -112,6 +113,56 @@ namespace SynonymsAPI.Services
                             if (word == "BA")
                             {
 
+                            }
+                            else if (word.Contains("B"))
+                            {
+                                if (word == "BA")
+                                {
+
+                                }
+                                else if (word == "BB")
+                                {
+                                    if (word == "BA")
+                                    {
+
+                                    }
+                                    else if (word == "BB")
+                                    {
+                                        if (word == "BA")
+                                        {
+
+                                        }
+                                        else if (word.Contains("B"))
+                                        {
+                                            if (word == "BA")
+                                            {
+
+                                            }
+                                            else if (word == "BB")
+                                            {
+                                                if (word == "BA")
+                                                {
+
+                                                }
+                                                else if (word == "BB")
+                                                {
+                                                    if (word == "BA")
+                                                    {
+
+                                                    }
+                                                    else if (word == "BB")
+                                                    {
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (word == "BB")
+                                        {
+
+                                        }
+                                    }
+                                }
                             }
                             else if (word == "BB")
                             {
@@ -181,36 +232,7 @@ namespace SynonymsAPI.Services
             }
         }
 
-        public bool Add(string word)
-        {
-            try
-            {
-                if (word == "A")
-                {
 
-                }
-                else if (word.Contains("B"))
-                {
-                    if (word == "BA")
-                    {
-
-                    }
-                    else if (word == "BB")
-                    {
-
-                    }
-                }
-                else if (word == "C")
-                {
-
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
 
         public bool AddTest(string word)
         {
