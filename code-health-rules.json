@@ -1,0 +1,23 @@
+  "rule_sets" : [ {
+    "thresholds" : [ {
+      "name" : "file_lines_of_code_for_alert",
+      "value" : "100"
+    }, {
+      "name" : "file_lines_of_code_for_critical_alert",
+      "value" : "120"
+    }, {
+      "name" : "file_lines_of_code_for_warning",
+      "value" : "80"
+    }, {
+      "name" : "function_lines_of_code_alert",
+      "value" : "101"
+    }, {
+      "name" : "function_lines_of_code_warning",
+      "value" : "81"
+    } ],
+    "rules" : [ {
+      "name" : "Lines of Code in a Single File",
+      "weight" : 1.0
+    } ]
+  } ]
+}
