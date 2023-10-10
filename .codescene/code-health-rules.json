@@ -19,7 +19,7 @@
     } ],
     "rules" : [ {
       "name" : "Lines of Code in a Single File",
-      "weight" : 0.5
+      "weight" : 1.0
     } ]
   } ]
 }
